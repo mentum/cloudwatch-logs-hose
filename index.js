@@ -23,6 +23,7 @@ function Source(config) {
 
 	this.state = 'closed';
 	this._onLogsSubscribers = [];
+	this._onErrorSubscribers = [];
 };
 
 Source.prototype.isOpen = function() {
@@ -45,26 +46,25 @@ Source.prototype.open = function() {
 
 	var self = this;
 
-	var hosePollId = setInterval(function() {
+	this._hosePollId = setInterval(function() {
 		self._pollLogStreams();
 	}, this.PollInterval);
 
-	var hosePollId2 = setInterval(function() {
+	this._hosePollId2 = setInterval(function() {
 		while(self._queuedStreams.length > 0) {
 			var el = self._queuedStreams.pop();
 			self._pollLogStreamLogs(el);
 		}
 	}, this.PollInterval + 500);
 
-	// TODO Open the hose
-
 	this.state = 'open';
 };
 
 Source.prototype.close = function() {
-	if(this.isClosed) return;
+	if(this.isClosed()) return;
 
-	// TODO Close the hose
+	clearInterval(this._hosePollId);
+	clearInterval(this._hosePollId2);
 
 	this.state = 'closed';
 };
@@ -108,8 +108,9 @@ Source.prototype._pollLogStreams = function(nextToken) {
 };
 
 Source.prototype._onPollFailed = function(err) {
-	// TODO
-	console.log(err);
+	for(var i in self._onLogsSubscribers) {
+		self._onErrorSubscribers[i](err);
+	}
 };
 
 Source.prototype._pollLogStreamLogs = function(name, nextToken) {
