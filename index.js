@@ -160,6 +160,10 @@ Source.prototype.on = function(event, fn) {
 	if((typeof event === 'string') && event.toLowerCase() === 'logs') {
 		this._onLogsSubscribers.push(fn);
 	}
+
+	if((typeof event === 'string') && event.toLowerCase() === 'error') {
+		this._onErrorSubscribers.push(fn);
+	}
 };
 
 exports.Source = Source;
