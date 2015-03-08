@@ -24,6 +24,11 @@ function Source(config) {
 	this.state = 'closed';
 	this._onLogsSubscribers = [];
 	this._onErrorSubscribers = [];
+
+	this._streams = [];
+	this._queuedStreams = [];
+	this._latestStreamTimestamps = [];
+	this._queuedEvents = [];
 };
 
 Source.prototype.isOpen = function() {
@@ -38,11 +43,6 @@ Source.prototype.open = function() {
 	if(this.isOpen()) return;
 
 	this._cwLogs = new AWS.CloudWatchLogs({ apiVersion: '2015-03-01' });
-	
-	this._streams = [];
-	this._queuedStreams = [];
-	this._latestStreamTimestamps = [];
-	this._queuedEvents = [];
 
 	var self = this;
 
