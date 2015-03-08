@@ -108,8 +108,8 @@ Source.prototype._pollLogStreams = function(nextToken) {
 };
 
 Source.prototype._onPollFailed = function(err) {
-	for(var i in self._onLogsSubscribers) {
-		self._onErrorSubscribers[i](err);
+	for(var i in this._onLogsSubscribers) {
+		this._onErrorSubscribers[i](err);
 	}
 };
 
