@@ -1,0 +1,33 @@
+{
+  "name": "cloudwatch-logs-hose",
+  "version": "0.0.1",
+  "description": "Transforms a CloudWatch Logs Group into a streaming hose of events",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1.14",
+    "jasmine": "^2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mentum/cloudwatch-logs-hose.git"
+  },
+  "keywords": [
+    "aws",
+    "cloudwatch",
+    "cloudwatch-logs",
+    "stream",
+    "log",
+    "logs",
+    "amazon"
+  ],
+  "author": "mentum",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mentum/cloudwatch-logs-hose/issues"
+  },
+  "homepage": "https://github.com/mentum/cloudwatch-logs-hose"
+}
