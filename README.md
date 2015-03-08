@@ -33,7 +33,7 @@ src.open();
 - ```Source.on('logs', fn)``` adds an event handler when a batch of logs is pulled
 - ```Source.on('error', fn)``` adds an event handler when an error occurs
 
-## Available ```Source``` Parameters
+## Available ```Source``` parameters
 - ```LogGroup``` *Mandatory* / The AWS CloudWatch Log Group to poll
 - ```StartTime``` *Optional* / Default to ```now``` / unix timestamp from where the logs should be pulled
 - ```EndTime``` *Optional* / Default to ```null``` / unix timestamp from where the pulling should stop
