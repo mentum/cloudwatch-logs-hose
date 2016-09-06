@@ -96,11 +96,12 @@ Source.prototype._pollLogStreams = function(nextToken) {
 
 				if(!(name in self._streams)) {
 					self._streams[name] = ingestion;
+					if(ingestion >= self.StartTime) {
+						self._queuedStreams.push(name);	
+					}
 				} else if(self._streams[name] < ingestion) {
 					self._streams[name] = ingestion;
-					//if(ingestion >= self.StartTime) { // TODO Fix this to work with local time
-						self._queuedStreams.push(name);	
-					//}
+					self._queuedStreams.push(name);	
 				}
 			}
 		}
